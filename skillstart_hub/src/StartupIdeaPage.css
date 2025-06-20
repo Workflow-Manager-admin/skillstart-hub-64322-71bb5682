@@ -1,0 +1,61 @@
+ /*
+  * StartupIdeaPage Background & Overlay Styles
+  *
+  * Background image: Royalty-free, skill/startup/innovation theme.
+  * Image source: Unsplash, Photo by Headway - "People working on laptops with sticky notes"
+  * https://unsplash.com/photos/people-working-on-laptops-pUAM5hPaCRI
+  * (Direct image: https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1400&q=80)
+  *
+  * To replace the background image, update the 'background-image' property below.
+  * For overlay intensity/contrast, change the rgba() alpha in `.startup-bg-overlay`.
+  */
+
+ .startup-bg-wrapper {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: 0;
+   background: url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1400&q=80') center center/cover no-repeat;
+ }
+
+ .startup-bg-overlay {
+   position: fixed;
+   top: 0; left: 0;
+   width: 100vw; height: 100vh;
+   background: rgba(20, 27, 45, 0.57); /* tweak alpha for greater/lesser contrast */
+   z-index: 1;
+   pointer-events: none;
+ }
+
+ .startup-content-area {
+   position: relative;
+   z-index: 2;
+   min-height: calc(100vh - 72px); /* allows for fixed navbar height */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
+ }
+
+ /* Optional: Layered effect for cards/sections above background */
+ .startup-card-section {
+   background: rgba(255,255,255,0.93); /* can tweak for more/less white */
+   border-radius: 18px;
+   box-shadow: 0 2px 18px rgba(74,144,226,0.10);
+   padding: 2.2rem 2rem;
+   margin-bottom: 34px;
+   border: 1px solid #E4ECF7;
+   max-width: 920px;
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ /* Responsive tweaks */
+ @media (max-width: 700px) {
+   .startup-card-section {
+     padding: 1.2rem 0.5rem;
+   }
+ }
