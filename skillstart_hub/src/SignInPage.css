@@ -1,0 +1,99 @@
+ /* SignInPage background & overlay styles
+    Replace '/assets/signin-bg.jpg' below with your final background image asset if needed.
+    Example royalty-free placeholder: https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1280&q=80
+ */
+
+.signin-bg-wrapper {
+  position: fixed;
+  /* cover the entire viewport - sits below fixed navbar */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* 
+    Replace the image URL below with your own image (e.g. '/assets/signin-bg.jpg') when available.
+    Example royalty-free from Unsplash:
+  */
+  background: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1280&q=80') center center/cover no-repeat;
+  z-index: 0;
+  /* dim background for readability */
+}
+
+.signin-bg-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(28, 33, 52, 0.54); /* semi-dark overlay for contrast */
+  z-index: 1;
+  pointer-events: none; /* pass clicks through overlay */
+}
+
+/* Page content relatively positioned above the overlays */
+.signin-content {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 72px); /* leave space for fixed navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form styling for clarity + contrast */
+.signin-form-container {
+  max-width: 390px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(66,107,183,0.07), 0 0 0 0 transparent;
+  padding: 38px 30px 32px 30px;
+  margin-top: 36px;
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.signin-form-container h2 {
+  color: var(--primary-color, #4A90E2);
+  font-weight: 700;
+  margin-bottom: 24px;
+  font-size: 2.2rem;
+}
+
+.signin-form-container form input {
+  width: 100%;
+  padding: 13px 13px;
+  margin-bottom: 18px;
+  border-radius: 7px;
+  border: 1.2px solid var(--border-color, #d0d6eb);
+  background: #fff;
+  color: #222;
+  font-size: 1.07rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.signin-form-container form input:focus {
+  border-color: var(--primary-color, #4A90E2);
+  background: #f0f7fe;
+}
+
+.signin-form-container form button.btn {
+  width: 100%;
+  background: var(--primary-color, #4A90E2);
+  color: #fff;
+  border-radius: 6px;
+  padding: 11px 0;
+  font-size: 1.06rem;
+  font-weight: 600;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  transition: background 0.17s;
+}
+
+.signin-form-container form button.btn:hover {
+  background: var(--secondary-color, #50E3C2);
+}

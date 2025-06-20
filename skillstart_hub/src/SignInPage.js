@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './SignInPage.css';
 
 /**
- * SignInPage provides a sign-in form for user authentication (placeholder).
+ * SignInPage provides a sign-in form for user authentication (placeholder), now with a full-page background image.
  */
 
 // PUBLIC_INTERFACE
@@ -23,53 +24,39 @@ function SignInPage() {
   }
 
   return (
-    <div className="container hero" style={{ maxWidth: 400, margin: "0 auto" }}>
-      <h2 className="title" style={{ fontSize: "2.2rem" }}>Sign In</h2>
-      <form style={{ width: "100%" }} onSubmit={handleSubmit} autoComplete="off">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "14px",
-            borderRadius: "6px",
-            border: "1px solid var(--border-color)",
-            background: "#fff",
-            color: "#222"
-          }}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "18px",
-            borderRadius: "6px",
-            border: "1px solid var(--border-color)",
-            background: "#fff",
-            color: "#222"
-          }}
-          required
-          autoComplete="current-password"
-        />
-        <button
-          className="btn btn-large"
-          style={{
-            width: "100%",
-            background: "var(--base-light)"
-          }}
-          type="submit"
-        >
-          Sign In
-        </button>
-      </form>
+    <div>
+      {/* Background covers entire viewport, behind navbar */}
+      <div className="signin-bg-wrapper" />
+      <div className="signin-bg-overlay" />
+      <div className="signin-content">
+        <div className="signin-form-container">
+          {/* Sign in form, clear/readable above background */}
+          <h2 className="title" style={{ fontSize: "2.2rem" }}>Sign In</h2>
+          <form style={{ width: "100%" }} onSubmit={handleSubmit} autoComplete="off">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
+            <button
+              className="btn btn-large"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
