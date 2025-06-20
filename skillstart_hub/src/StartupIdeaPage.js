@@ -91,23 +91,41 @@ const MOCK_STARTUP_IDEAS = [
   }
 ];
 
-// Popular skill set for pill/chip UI
+/**
+ * EXTENDED_SET: Large, diverse, and categorized list of popular skills for pill/chip UI.
+ * Categories help with logical ordering and UI grouping if needed in the future.
+ */
 const POPULAR_SKILLS = [
-  "Web Design",
-  "Copywriting",
-  "Data Science",
-  "Marketing",
-  "Mobile Apps",
-  "UI/UX",
-  "Cloud",
-  "Finance",
-  "Sales",
-  "SEO",
-  "DevOps",
-  "Content Creation",
-  "Video Editing",
-  "AI/ML",
-  "Product Management"
+  // Design & Creative
+  "Web Design", "Graphic Design", "UI/UX", "Logo Design", "Animation", "Photography", "Video Editing", "Illustration", "Branding",
+
+  // Software Development
+  "Frontend Development", "Backend Development", "Full Stack", "Mobile Apps", "iOS Development", "Android Development", "Game Development",
+  "DevOps", "Cloud", "Database Development", "API Development", "Embedded Systems", "Cybersecurity", "QA/Testing",
+
+  // Programming Languages/Frameworks
+  "Python", "JavaScript", "TypeScript", "Java", "C++", "C#", "Go", "Ruby", "PHP", "Swift", "Kotlin", "React", "Vue", "Angular", "Django", "Node.js", "Spring Boot", ".NET",
+
+  // Data, AI, Science
+  "Data Science", "Data Analysis", "Machine Learning", "Deep Learning", "AI/ML", "Statistics", "Business Intelligence", "Data Engineering",
+
+  // Product, Biz, and Ops
+  "Product Management", "Project Management", "Business Strategy", "Management Consulting", "Finance", "Accounting", "HR", "Operations", "Supply Chain",
+
+  // Marketing & Growth
+  "Marketing", "Digital Marketing", "SEO", "SEM", "Content Marketing", "Copywriting", "Brand Strategy", "PR", "Growth Hacking", "Social Media", "Email Marketing", "Performance Marketing",
+
+  // Soft Skills & Communication
+  "Leadership", "Teamwork", "Communication", "Public Speaking", "Negotiation", "Problem Solving", "Critical Thinking", "Time Management",
+
+  // Sales, Customer
+  "Sales", "CRM", "Customer Support", "Customer Success", "Lead Generation", "Account Management",
+
+  // Entrepreneurship/Startup
+  "Pitching", "Fundraising", "Lean Startup", "Market Research", "Business Model Canvas",
+
+  // Miscellaneous/Common Skills
+  "Content Creation", "Blogging", "Podcasting", "Language Learning", "Teaching/Tutoring", "Research", "Legal", "E-commerce", "UI Prototyping", "Community Building", "Event Planning"
 ];
 
 const MOCK_TOOLS = [
