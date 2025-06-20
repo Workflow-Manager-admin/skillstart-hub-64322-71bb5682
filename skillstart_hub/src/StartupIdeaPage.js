@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 
 // --- Static mock data for initial ideas and resources ----
 const MOCK_STARTUP_IDEAS = [
+  // Original three ideas
   {
     title: "Remote Design Studio Platform",
     description: "Enables freelance designers to collaborate with clients and teams, featuring built-in portfolio tools and AI feedback.",
@@ -19,6 +20,75 @@ const MOCK_STARTUP_IDEAS = [
     title: "DataScience-as-a-Service Tools",
     description: "Plug-and-play analytics and ML tools for startups with minimal coding required.",
   },
+  // Additional enriched ideas
+  {
+    title: "Virtual Fitness Coaching App",
+    description: "Connects certified trainers with individuals; personalized workout routines and real-time video coaching.",
+  },
+  {
+    title: "Elderly Tech Support Service",
+    description: "On-demand tech help for seniors — virtual or in-home, subscription-based for recurring peace of mind.",
+  },
+  {
+    title: "Marketplace for Micro-Consulting",
+    description: "A platform where professionals offer bite-sized consulting sessions for startups and SMEs.",
+  },
+  {
+    title: "B2B Podcast Hosting and Outreach",
+    description: "Tool for businesses to launch/manage podcasts, book guests, and integrate analytics effortlessly.",
+  },
+  {
+    title: "Green Home Upgrade Platform",
+    description: "Guides homeowners to eco-friendly upgrades with vendor comparisons, calculators, and one-click contractor booking.",
+  },
+  {
+    title: "SkillSwap Community App",
+    description: "Peer-to-peer app where users exchange services/skills locally or globally.",
+  },
+  {
+    title: "Automated Resume Tailoring Tool",
+    description: "Uses AI to adjust resumes for specific jobs, offering personalized feedback and ATS optimization.",
+  },
+  {
+    title: "Remote Team Building Experiences",
+    description: "Curated online activities and games for distributed teams to foster engagement and culture.",
+  },
+  {
+    title: "No-Code App Builder for Nonprofits",
+    description: "Empowers charities to easily create donation portals, event pages, and volunteer scheduling apps.",
+  },
+  {
+    title: "Virtual Reality Language Learning",
+    description: "Immersive language practice with 3D interactive scenes and real-time pronunciation analysis.",
+  },
+  {
+    title: "Personal Finance Automation Suite",
+    description: "Automates savings, investments, budgeting, and bill-pay for young professionals.",
+  },
+  {
+    title: "Content Repurposing Platform",
+    description: "Transforms blog posts into videos, podcasts, or infographics with AI-driven formats.",
+  },
+  {
+    title: "AI-Powered Personalized Meal Planning",
+    description: "Meal plans and shopping lists tailored to dietary needs and local grocery availability.",
+  },
+  {
+    title: "NFT Art Curation and Marketplace",
+    description: "Platform for up-and-coming artists to showcase and sell digital art NFTs with layered curation.",
+  },
+  {
+    title: "Pop-Up Retail Space Platform",
+    description: "Matches brands with temporary retail spaces, managing booking and legal logistics online.",
+  },
+  {
+    title: "Home Lab Science Kits Subscription",
+    description: "Monthly subscription boxes with engaging STEM projects for children and parents to do at home.",
+  },
+  {
+    title: "Freelancer Compliance & Tax Helper",
+    description: "App for gig workers to track income, automate tax calculations, and store contracts in one place.",
+  }
 ];
 
 // Popular skill set for pill/chip UI
@@ -85,7 +155,9 @@ function StartupIdeaPage() {
   // State for combined skill input (manual + chips)
   const [skillInput, setSkillInput] = useState('');
   const [submittedSkills, setSubmittedSkills] = useState([]);
-  const [suggestedIdeas, setSuggestedIdeas] = useState(MOCK_STARTUP_IDEAS);
+  const [suggestedIdeas, setSuggestedIdeas] = useState([]);
+  // New: Track if 'Get Suggestions' has been clicked
+  const [suggestionsVisible, setSuggestionsVisible] = useState(false);
 
   // Track selected chips so we can visually show which are chosen
   const [selectedChips, setSelectedChips] = useState([]);
@@ -102,14 +174,14 @@ function StartupIdeaPage() {
     const allSkills = Array.from(new Set([...manualSkills, ...selectedChips]));
     setSubmittedSkills(allSkills);
     setSuggestedIdeas(generateStartupIdeas(allSkills));
+    setSuggestionsVisible(true);
   }
 
-  // Handler for clicking a skill chip: add it to both chip-visual state and input value (if not already present)
+  // Handler for clicking a skill chip: add/remove, and always hide suggestions until next submit
   function handleChipClick(skill) {
+    setSuggestionsVisible(false); // Hide suggestions on chip change until "Get Suggestions"
     if (selectedChips.includes(skill)) {
-      // Optionally deselect if already selected: remove from selectedChips and from input string
       setSelectedChips(selectedChips.filter(s => s !== skill));
-      // Remove from manual entry as well if present (case-insensitive)
       const manualList = skillInput
         .split(',')
         .map(s => s.trim())
@@ -118,13 +190,11 @@ function StartupIdeaPage() {
       setSkillInput(manualList.join(", "));
     } else {
       setSelectedChips([...selectedChips, skill]);
-      // Add to manual input string for better visibility (if not present already, case-insensitive)
       const manualList = skillInput
         .split(',')
         .map(s => s.trim())
         .filter(Boolean);
       if (!manualList.some(s => s.toLowerCase() === skill.toLowerCase())) {
-        // Add with comma if existing
         setSkillInput(skillInput && skillInput.trim() !== "" ? skillInput.trim() + ", " + skill : skill);
       }
     }
@@ -214,7 +284,10 @@ function StartupIdeaPage() {
           <input
             type="text"
             value={skillInput}
-            onChange={e => setSkillInput(e.target.value)}
+            onChange={e => {
+                setSkillInput(e.target.value);
+                setSuggestionsVisible(false); // Hide suggestions until submit
+            }}
             placeholder="e.g. Web Design, Copywriting, Data Science"
             style={{
               flex: 2,
@@ -248,7 +321,7 @@ function StartupIdeaPage() {
           </button>
         </form>
 
-        {/* SUGGESTED STARTUP IDEAS */}
+        {/* SUGGESTED STARTUP IDEAS - show only if suggestionsVisible */}
         <section style={{
           marginTop: "16px",
           marginBottom: "32px",
@@ -256,31 +329,38 @@ function StartupIdeaPage() {
           <div style={{ color: "#50E3C2", fontWeight: 600, fontSize: "1.18rem", marginBottom: "11px" }}>
             Suggested Startup Ideas
           </div>
-          <ul style={{ paddingLeft: 0, margin: 0, listStyle: "none" }}>
-            {suggestedIdeas.map((idea, idx) => (
-              <li key={idea.title} style={{
-                background: "#f8fbfd",
-                border: "1px solid #E5E7F1",
-                borderRadius: "10px",
-                padding: "20px 18px 16px 18px",
-                marginBottom: "15px",
-                boxShadow: "0 1px 7px rgba(80,227,194,0.07)",
-              }}>
-                <span style={{ color: "#4A90E2", fontWeight: 500, fontSize: "1.12rem" }}>{idea.title}</span>
-                <div style={{
-                  color: "#373E49",
-                  fontSize: "1.03rem",
-                  marginTop: "7px",
-                  opacity: 0.9,
-                }}>{idea.description}</div>
-              </li>
-            ))}
-            {suggestedIdeas.length === 0 && (
-              <li style={{ color: "#aaa", fontSize: "1.08rem" }}>
-                <em>No suggestions available yet.</em>
-              </li>
-            )}
-          </ul>
+          {!suggestionsVisible && (
+            <div style={{ color: "#aaa", fontSize: "1.10rem", padding: "10px 0 18px 0" }}>
+              <em>Enter some skills and click <b>Get Suggestions</b> to see startup ideas tailored for you!</em>
+            </div>
+          )}
+          {suggestionsVisible && (
+            <ul style={{ paddingLeft: 0, margin: 0, listStyle: "none" }}>
+              {suggestedIdeas.map((idea, idx) => (
+                <li key={idea.title + idx} style={{
+                  background: "#f8fbfd",
+                  border: "1px solid #E5E7F1",
+                  borderRadius: "10px",
+                  padding: "20px 18px 16px 18px",
+                  marginBottom: "15px",
+                  boxShadow: "0 1px 7px rgba(80,227,194,0.07)",
+                }}>
+                  <span style={{ color: "#4A90E2", fontWeight: 500, fontSize: "1.12rem" }}>{idea.title}</span>
+                  <div style={{
+                    color: "#373E49",
+                    fontSize: "1.03rem",
+                    marginTop: "7px",
+                    opacity: 0.9,
+                  }}>{idea.description}</div>
+                </li>
+              ))}
+              {suggestedIdeas.length === 0 && (
+                <li style={{ color: "#aaa", fontSize: "1.08rem" }}>
+                  <em>No suggestions available yet.</em>
+                </li>
+              )}
+            </ul>
+          )}
         </section>
       </section>
 
