@@ -110,14 +110,12 @@ const POPULAR_SKILLS = [
   "Mobile Development",
   "Cloud Computing",
   "DevOps",
-  "API Development",
   "Cybersecurity",
 
   // Programming Languages/Frameworks (representative/modern)
   "Python",
   "JavaScript",
   "TypeScript",
-  "React",
   "Node.js",
 
   // Data, AI & Analytics
@@ -140,20 +138,14 @@ const POPULAR_SKILLS = [
   "Social Media Marketing",
 
   // User/Customer
-  "UX Research",
   "Customer Experience",
 
   // Other highly relevant/modern
   "Startup Strategy",
-  "Fundraising",
-  "Innovation",
   "E-commerce",
-  "No-Code Tools",
 
   // Optional: a few key soft skills
-  "Leadership",
-  "Critical Thinking",
-  "Collaboration"
+  "Leadership"
 ];
 
 const MOCK_TOOLS = [
