@@ -30,9 +30,13 @@ function HomePage() {
         >
           Explore Startup Ideas
         </button>
-        <a href="/signin">
-          <button className="btn btn-large" style={{ background: "var(--primary-color)", color: "#fff" }}>Sign In</button>
-        </a>
+        <button
+          className="btn btn-large"
+          style={{ background: "var(--primary-color)", color: "#fff" }}
+          onClick={() => navigate('/signin')}
+        >
+          Sign In
+        </button>
       </div>
     </div>
   );
