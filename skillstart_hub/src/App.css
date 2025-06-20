@@ -1,6 +1,9 @@
 :root {
   --base-light: #00ffff;
   --base-dark: #00008b;
+  --primary-color: #4A90E2;
+  --secondary-color: #50E3C2;
+  --accent-color: #F5A623;
   --text-color: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --border-color: rgba(255, 255, 255, 0.1);
@@ -33,6 +36,19 @@ body {
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.07rem;
+  padding: 0 7px;
+  transition: color 0.15s;
+}
+
+.nav-link:hover {
+  color: var(--base-light);
 }
 
 .logo {
