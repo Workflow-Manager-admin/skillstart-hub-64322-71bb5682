@@ -96,36 +96,63 @@ const MOCK_STARTUP_IDEAS = [
  * Categories help with logical ordering and UI grouping if needed in the future.
  */
 const POPULAR_SKILLS = [
-  // Design & Creative
-  "Web Design", "Graphic Design", "UI/UX", "Logo Design", "Animation", "Photography", "Video Editing", "Illustration", "Branding",
+  // Design & Creative (curated)
+  "UI/UX Design",
+  "Web Design",
+  "Graphic Design",
+  "Product Design",
 
-  // Software Development
-  "Frontend Development", "Backend Development", "Full Stack", "Mobile Apps", "iOS Development", "Android Development", "Game Development",
-  "DevOps", "Cloud", "Database Development", "API Development", "Embedded Systems", "Cybersecurity", "QA/Testing",
+  // Software Development & Engineering
+  "Frontend Development",
+  "Backend Development",
+  "Full Stack Development",
+  "Mobile Development",
+  "Cloud Computing",
+  "DevOps",
+  "API Development",
+  "Cybersecurity",
 
-  // Programming Languages/Frameworks
-  "Python", "JavaScript", "TypeScript", "Java", "C++", "C#", "Go", "Ruby", "PHP", "Swift", "Kotlin", "React", "Vue", "Angular", "Django", "Node.js", "Spring Boot", ".NET",
+  // Programming Languages/Frameworks (representative/modern)
+  "Python",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Node.js",
 
-  // Data, AI, Science
-  "Data Science", "Data Analysis", "Machine Learning", "Deep Learning", "AI/ML", "Statistics", "Business Intelligence", "Data Engineering",
+  // Data, AI & Analytics
+  "Data Science",
+  "Machine Learning",
+  "AI/ML",
+  "Data Analytics",
+  "Data Engineering",
 
-  // Product, Biz, and Ops
-  "Product Management", "Project Management", "Business Strategy", "Management Consulting", "Finance", "Accounting", "HR", "Operations", "Supply Chain",
+  // Product & Business
+  "Product Management",
+  "Business Development",
+  "Project Management",
 
   // Marketing & Growth
-  "Marketing", "Digital Marketing", "SEO", "SEM", "Content Marketing", "Copywriting", "Brand Strategy", "PR", "Growth Hacking", "Social Media", "Email Marketing", "Performance Marketing",
+  "Digital Marketing",
+  "Content Marketing",
+  "SEO",
+  "Growth Hacking",
+  "Social Media Marketing",
 
-  // Soft Skills & Communication
-  "Leadership", "Teamwork", "Communication", "Public Speaking", "Negotiation", "Problem Solving", "Critical Thinking", "Time Management",
+  // User/Customer
+  "UX Research",
+  "Customer Experience",
 
-  // Sales, Customer
-  "Sales", "CRM", "Customer Support", "Customer Success", "Lead Generation", "Account Management",
+  // Other highly relevant/modern
+  "Startup Strategy",
+  "Fundraising",
+  "Innovation",
+  "E-commerce",
+  "No-Code Tools",
 
-  // Entrepreneurship/Startup
-  "Pitching", "Fundraising", "Lean Startup", "Market Research", "Business Model Canvas",
-
-  // Miscellaneous/Common Skills
-  "Content Creation", "Blogging", "Podcasting", "Language Learning", "Teaching/Tutoring", "Research", "Legal", "E-commerce", "UI Prototyping", "Community Building", "Event Planning"
+  // Optional: a few key soft skills
+  "Leadership",
+  "Critical Thinking",
+  "Collaboration"
 ];
 
 const MOCK_TOOLS = [
