@@ -1,7 +1,22 @@
- /* SignInPage background & overlay styles
-    Replace '/assets/signin-bg.jpg' below with your final background image asset if needed.
-    Example royalty-free placeholder: https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1280&q=80
- */
+/* SignInPage background & overlay styles
+
+   Updated background image to reflect skills, startup, and innovation themes.
+   Image source: royalty-free, startup/skill-appropriate.
+   Chosen: Unsplash, Photo by Shridhar Gupta – "Flat lay photography of MacBook, notebook, and smartphone": 
+   https://unsplash.com/photos/flat-lay-photography-of-macbook-notebook-iphone-and-apple-watch-muOHbrFGEQY
+
+   Hero direct link: https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1280&q=80
+
+   This image reflects technology, learning, and innovation (MacBook + notebook + phone + pen), visually clean,
+   and ensures readable overlays and forms.
+
+   RECOMMENDATIONS:
+   - For further enhancement, host a local image asset (e.g. /assets/skillstart-signin-bg.jpg) 
+     in the future for optimal control and reliability.
+   - Fine-tune overlay's rgba() alpha value in `.signin-bg-overlay` if text contrast is ever insufficient.
+   - Consider using a branded SVG/PNG with abstract skills icons for more unique branding later.
+   - Test image readability on both desktop and mobile devices.
+*/
 
 .signin-bg-wrapper {
   position: fixed;
@@ -11,12 +26,12 @@
   width: 100vw;
   height: 100vh;
   /* 
-    Replace the image URL below with your own image (e.g. '/assets/signin-bg.jpg') when available.
-    Example royalty-free from Unsplash:
+    Updated to a royalty-free skill/startup/innovation themed image.
+    Source: Unsplash
   */
-  background: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1280&q=80') center center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1280&q=80') center center/cover no-repeat;
   z-index: 0;
-  /* dim background for readability */
+  /* background can be made slightly darker at the image level (Photoshop) for even greater legibility if desired */
 }
 
 .signin-bg-overlay {
