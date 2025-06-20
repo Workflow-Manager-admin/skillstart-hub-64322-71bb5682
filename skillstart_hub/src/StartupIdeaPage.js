@@ -21,6 +21,25 @@ const MOCK_STARTUP_IDEAS = [
   },
 ];
 
+// Popular skill set for pill/chip UI
+const POPULAR_SKILLS = [
+  "Web Design",
+  "Copywriting",
+  "Data Science",
+  "Marketing",
+  "Mobile Apps",
+  "UI/UX",
+  "Cloud",
+  "Finance",
+  "Sales",
+  "SEO",
+  "DevOps",
+  "Content Creation",
+  "Video Editing",
+  "AI/ML",
+  "Product Management"
+];
+
 const MOCK_TOOLS = [
   "Figma (collaborative design)",
   "Jasper (AI-powered writing)",
@@ -57,23 +76,103 @@ function generateStartupIdeas(skills) {
   return MOCK_STARTUP_IDEAS;
 }
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * StartupIdeaPage component for the interactive input of skills,
+ * now includes common skills as selectable options ("chips").
+ */
 function StartupIdeaPage() {
-  // State for skill input
+  // State for combined skill input (manual + chips)
   const [skillInput, setSkillInput] = useState('');
   const [submittedSkills, setSubmittedSkills] = useState([]);
   const [suggestedIdeas, setSuggestedIdeas] = useState(MOCK_STARTUP_IDEAS);
 
-  // Handler when the user submits skills
+  // Track selected chips so we can visually show which are chosen
+  const [selectedChips, setSelectedChips] = useState([]);
+
+  // Handler for user submitting skills form
   function handleSkillSubmit(e) {
     e.preventDefault();
-    const skills = skillInput
+    // Merge skillInput (split by comma) and selectedChips, filter for uniqueness
+    const manualSkills = skillInput
       .split(',')
       .map(s => s.trim())
       .filter(Boolean);
-    setSubmittedSkills(skills);
-    setSuggestedIdeas(generateStartupIdeas(skills));
+    // Prevent duplicates
+    const allSkills = Array.from(new Set([...manualSkills, ...selectedChips]));
+    setSubmittedSkills(allSkills);
+    setSuggestedIdeas(generateStartupIdeas(allSkills));
   }
+
+  // Handler for clicking a skill chip: add it to both chip-visual state and input value (if not already present)
+  function handleChipClick(skill) {
+    if (selectedChips.includes(skill)) {
+      // Optionally deselect if already selected: remove from selectedChips and from input string
+      setSelectedChips(selectedChips.filter(s => s !== skill));
+      // Remove from manual entry as well if present (case-insensitive)
+      const manualList = skillInput
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .filter(s => s.toLowerCase() !== skill.toLowerCase());
+      setSkillInput(manualList.join(", "));
+    } else {
+      setSelectedChips([...selectedChips, skill]);
+      // Add to manual input string for better visibility (if not present already, case-insensitive)
+      const manualList = skillInput
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+      if (!manualList.some(s => s.toLowerCase() === skill.toLowerCase())) {
+        // Add with comma if existing
+        setSkillInput(skillInput && skillInput.trim() !== "" ? skillInput.trim() + ", " + skill : skill);
+      }
+    }
+  }
+
+  // Render chips as styled pill-buttons
+  const renderSkillChips = () => (
+    <div style={{
+      display: 'flex',
+      gap: '10px',
+      flexWrap: 'wrap',
+      marginBottom: '18px',
+      marginTop: '4px'
+    }}>
+      {POPULAR_SKILLS.map(skill => (
+        <button
+          type="button"
+          key={skill}
+          onClick={() => handleChipClick(skill)}
+          style={{
+            background: selectedChips.includes(skill) ? "var(--primary-color)" : "#f2f7fd",
+            color: selectedChips.includes(skill) ? "#fff" : "#275176",
+            border: selectedChips.includes(skill) ? "1.8px solid var(--primary-color)" : "1.4px solid #bbccf1",
+            borderRadius: "17px",
+            padding: "6px 16px",
+            fontWeight: 500,
+            fontSize: "1.05rem",
+            cursor: "pointer",
+            outline: "none",
+            boxShadow: selectedChips.includes(skill)
+              ? "0 2px 9px 0 rgba(74,144,226,0.09)"
+              : "0 1px 5px 0 rgba(205,224,246,0.1)",
+            transition: "all 0.13s",
+          }}
+          aria-pressed={selectedChips.includes(skill)}
+        >
+          {skill}
+          {selectedChips.includes(skill) ? (
+            <span style={{
+              marginLeft: 6,
+              fontWeight: 900,
+              fontSize: "1.01em"
+            }}>✔</span>
+          ) : null}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="container" style={{ paddingTop: "64px", paddingBottom: "32px" }}>
@@ -98,6 +197,19 @@ function StartupIdeaPage() {
         }}>
           Turn Your Skills Into Startup Ideas
         </h2>
+        {/* Popular/Common Skills Section */}
+        <div
+          style={{
+            fontWeight: 500,
+            fontSize: "1.07rem",
+            marginBottom: "2px",
+            color: "var(--base-dark)",
+            opacity: 0.92
+          }}>
+          Popular skills:
+        </div>
+        {renderSkillChips()}
+
         <form onSubmit={handleSkillSubmit} style={{ display: "flex", gap: "18px", flexWrap: "wrap", marginBottom: "18px" }}>
           <input
             type="text"
@@ -117,6 +229,7 @@ function StartupIdeaPage() {
               marginRight: "4px",
             }}
             aria-label="Your Skills"
+            autoComplete="off"
           />
           <button type="submit"
             className="btn"
